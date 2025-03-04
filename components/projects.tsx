@@ -94,7 +94,17 @@ const projects = [
 
 export default function Projects() {
   const [activeTab, setActiveTab] = useState("all")
-  const [selectedProject, setSelectedProject] = useState(null)
+  const [selectedProject, setSelectedProject] = useState<null | {
+    id: number;
+    title: string;
+    description: string;
+    longDescription: string;
+    image: string;
+    category: string;
+    tags: string[];
+    demoUrl: string;
+    githubUrl: string;
+  }>(null)
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, amount: 0.1 })
 
@@ -158,7 +168,8 @@ export default function Projects() {
                             <DialogHeader>
                               <DialogTitle>{selectedProject?.title}</DialogTitle>
                               <DialogDescription>
-                                {selectedProject?.category.charAt(0).toUpperCase() + selectedProject?.category.slice(1)}{" "}
+                                {selectedProject && selectedProject.category &&
+                                  `${selectedProject.category.charAt(0).toUpperCase()}${selectedProject.category.slice(1)}`}{" "}
                                 Project
                               </DialogDescription>
                             </DialogHeader>
