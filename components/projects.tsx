@@ -20,7 +20,7 @@ import {
 const projects = [
   {
     id: 1,
-    title: "RL learning and dashboard board, 3d model or llm (Research)",
+    title: "Helix AI tooling dashboard board (prototype)",
     description: "A stock forecasting application leveraging transformer architecture to predict 30-day market trajectories.",
     longDescription:
       "Engineered a stock forecasting application using transformer architecture to predict 30-day market trajectories. Implemented customized pre-training on historical price data, integrating news sentiment analysis and flexible technical indicators. Designed an intuitive AI Tooling interface that streamlines data extraction, model training, and visualization processes across any publicly traded security, enabling efficient forecasting and parameter optimization.",
@@ -28,7 +28,7 @@ const projects = [
     category: "ai",
     tags: ["Pytorch", "Numpy", "Pandas", "Python", "scikit-learn", "matplotlib"],
     demoUrl: "#",
-    githubUrl: "#",
+    githubUrl: "https://github.com/zachrizzo/Helix-ai-tooling",
   },
   {
     id: 2,
@@ -36,11 +36,11 @@ const projects = [
     description: "Advanced AI trading system combining transformer architecture with technical and sentiment analysis.",
     longDescription:
       "Engineered a sophisticated trading application leveraging Pytorch, Numpy, Pandas, Python, scikit-learn, and matplotlib. Designed with customized pre-training on historical price data, integrating news sentiment analysis and flexible technical indicators. Created an intuitive AI Tooling interface that streamlines data extraction, model training, and visualization processes across any publicly traded security, enabling efficient backtesting and parameter optimization.",
-    image: "/placeholder.svg?height=600&width=800",
+    image: "/stock-trainner.png",
     category: "ai",
     tags: ["Pytorch", "Numpy", "Pandas", "Python", "scikit-learn", "matplotlib"],
-    demoUrl: "#",
-    githubUrl: "#",
+    demoUrl: null,
+    githubUrl: "https://github.com/zachrizzo/transfomer_stocks",
   },
   {
     id: 3,
@@ -48,48 +48,49 @@ const projects = [
     description: "An autonomous robot that can navigate in map, detect and identify objects using computer vision.",
     longDescription:
       "Developed an AI robot using Ros 2, Rviz, Map, Slam, LangChain technologies. Created a system that can navigate in map space around itself, identify objects it has seen through visual inquiry, and efficiently search using a 3D depth camera, Lidar, and vector search capabilities.",
-    image: "/placeholder.svg?height=600&width=800",
+    image: "/robot_screenshot.png",
     category: "ai",
     tags: ["Ros 2", "Rviz", "Map", "Slam", "LangChain"],
     demoUrl: "#",
-    githubUrl: "#",
+    githubUrl: "https://github.com/zachrizzo/robot_smart_camera",
   },
-  {
-    id: 4,
-    title: "AI Agent Development",
-    description: "Created the 'Kit Assistant' for vector search and AI-driven task execution in speech therapy.",
-    longDescription:
-      "Architected and engineered the 'Kit Assistant' using OpenAI's, Langchain, and Genkit for vector search. Implemented Agentic task execution for speech therapy domain-specific tasks, developing an AI-driven fine-tuning pipeline for improved accuracy. Created systems that generate structured summaries of therapy objectives and outcomes.",
-    image: "/placeholder.svg?height=600&width=800",
-    category: "ai",
-    tags: ["OpenAI", "Langchain", "Genkit", "Vector Search", "Fine-tuning"],
-    demoUrl: "#",
-    githubUrl: "#",
-  },
-  {
-    id: 5,
-    title: "SaaS Application with React & Next.js",
-    description: "Co-led the design and development of an AI-powered SaaS product with comprehensive frontend and backend.",
-    longDescription:
-      "Co-led the design and development of an AI-powered SaaS Product built with React, Next.js, JavaScript, and MUI Components. Created React Full Calendar and lexical integrations, enhancing user experience with consistent interfaces. Architected API development and backend integration with Python and Node.js, building serverless functions for AI processing and secure data operations.",
-    image: "/placeholder.svg?height=600&width=800",
-    category: "web",
-    tags: ["React", "Next.js", "JavaScript", "MUI", "Python", "Node.js"],
-    demoUrl: "#",
-    githubUrl: "#",
-  },
-  {
-    id: 6,
-    title: "Unified Web & Mobile Application",
-    description: "Led the development of a unified web and mobile application for healthcare services.",
-    longDescription:
-      "Led the creation of a unified web and mobile application using React, React Native & Redux, enhancing user experience with consistent, responsive interfaces across all platforms. Implemented robust support for both iOS and Android environments using Next.js and Expo for streamlined development and platform-specific compliance. Spearheaded backend infrastructure development with Node.js and Express.js, and integrated with Firebase for secure data handling and patient privacy.",
-    image: "/placeholder.svg?height=600&width=800",
-    category: "mobile",
-    tags: ["React", "React Native", "Redux", "Next.js", "Expo", "Node.js", "Firebase"],
-    demoUrl: "#",
-    githubUrl: "#",
-  },
+  // {
+  //   id: 4,
+  //   title: "AI Agent Development",
+  //   description: "Created the 'Kit Assistant' for vector search and AI-driven task execution in speech therapy.",
+  //   longDescription:
+  //     "Architected and engineered the 'Kit Assistant' using OpenAI's, Langchain, and Genkit for vector search. Implemented Agentic task execution for speech therapy domain-specific tasks, developing an AI-driven fine-tuning pipeline for improved accuracy. Created systems that generate structured summaries of therapy objectives and outcomes.",
+  //   image: "/placeholder.svg?height=600&width=800",
+  //   category: "ai",
+  //   tags: ["OpenAI", "Langchain", "Genkit", "Vector Search", "Fine-tuning"],
+  //   demoUrl: "#",
+  //   githubUrl: "#",
+  // },
+
+  // {
+  //   id: 5,
+  //   title: "SaaS Application with React & Next.js",
+  //   description: "Co-led the design and development of an AI-powered SaaS product with comprehensive frontend and backend.",
+  //   longDescription:
+  //     "Co-led the design and development of an AI-powered SaaS Product built with React, Next.js, JavaScript, and MUI Components. Created React Full Calendar and lexical integrations, enhancing user experience with consistent interfaces. Architected API development and backend integration with Python and Node.js, building serverless functions for AI processing and secure data operations.",
+  //   image: "/placeholder.svg?height=600&width=800",
+  //   category: "web",
+  //   tags: ["React", "Next.js", "JavaScript", "MUI", "Python", "Node.js"],
+  //   demoUrl: "#",
+  //   githubUrl: "#",
+  // },
+  // {
+  //   id: 6,
+  //   title: "Unified Web & Mobile Application",
+  //   description: "Led the development of a unified web and mobile application for healthcare services.",
+  //   longDescription:
+  //     "Led the creation of a unified web and mobile application using React, React Native & Redux, enhancing user experience with consistent, responsive interfaces across all platforms. Implemented robust support for both iOS and Android environments using Next.js and Expo for streamlined development and platform-specific compliance. Spearheaded backend infrastructure development with Node.js and Express.js, and integrated with Firebase for secure data handling and patient privacy.",
+  //   image: "/placeholder.svg?height=600&width=800",
+  //   category: "mobile",
+  //   tags: ["React", "React Native", "Redux", "Next.js", "Expo", "Node.js", "Firebase"],
+  //   demoUrl: "#",
+  //   githubUrl: "#",
+  // },
 ]
 
 export default function Projects() {
@@ -102,7 +103,7 @@ export default function Projects() {
     image: string;
     category: string;
     tags: string[];
-    demoUrl: string;
+    demoUrl: string | null;
     githubUrl: string;
   }>(null)
   const ref = useRef(null)
@@ -194,10 +195,12 @@ export default function Projects() {
                                 </div>
                                 <div className="flex gap-4">
                                   <Button size="sm" asChild>
-                                    <a href={selectedProject?.demoUrl} target="_blank" rel="noopener noreferrer">
-                                      <ExternalLink className="mr-2 h-4 w-4" />
-                                      Live Demo
-                                    </a>
+                                    {selectedProject?.demoUrl && (
+                                      <a href={selectedProject?.demoUrl} target="_blank" rel="noopener noreferrer">
+                                        <ExternalLink className="mr-2 h-4 w-4" />
+                                        Live Demo
+                                      </a>
+                                    )}
                                   </Button>
                                   <Button variant="outline" size="sm" asChild>
                                     <a href={selectedProject?.githubUrl} target="_blank" rel="noopener noreferrer">
@@ -233,10 +236,16 @@ export default function Projects() {
                         </a>
                       </Button>
                       <Button size="sm" asChild>
-                        <a href={project.demoUrl} target="_blank" rel="noopener noreferrer">
-                          <ExternalLink className="mr-2 h-4 w-4" />
-                          Demo
-                        </a>
+                        {project.demoUrl ? (
+                          <a href={project.demoUrl} target="_blank" rel="noopener noreferrer">
+                            <ExternalLink className="mr-2 h-4 w-4" />
+                            Demo
+                          </a>
+                        ) : (
+                          <span className="mr-2 h-4 w-24">
+                            No live demo
+                          </span>
+                        )}
                       </Button>
                     </CardFooter>
                   </Card>

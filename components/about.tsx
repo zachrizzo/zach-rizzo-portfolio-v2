@@ -4,15 +4,12 @@ import { useRef, useState, useEffect } from "react"
 import { Canvas, useFrame } from "@react-three/fiber"
 import { Float, Text, Center, Environment } from "@react-three/drei"
 import { motion, useInView } from "framer-motion"
-import { Card, CardContent } from "@/components/ui/card"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import Image from "next/image"
 import Typewriter from 'typewriter-effect'
 import { useTheme } from "next-themes"
 
 function FloatingText() {
   const textRef = useRef<any>(null)
-  const [fontError, setFontError] = useState(false)
 
   useFrame((state) => {
     if (!textRef.current) return
