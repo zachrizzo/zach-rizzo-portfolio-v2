@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import Header from "@/components/header"
 import Hero from "@/components/hero"
 import About from "@/components/about"
 import Projects from "@/components/projects"
@@ -8,7 +9,6 @@ import Skills from "@/components/skills"
 import Contact from "@/components/contact"
 import Footer from "@/components/footer"
 import { Analytics } from "@/components/analytics"
-import ThemeToggle from "@/components/theme-toggle"
 
 export default function Home() {
   const [isFirebaseAvailable, setIsFirebaseAvailable] = useState(false)
@@ -59,13 +59,23 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-background to-background/80">
-      <ThemeToggle />
+      <Header />
       {isFirebaseAvailable && !firebaseError ? <Analytics /> : null}
-      <Hero />
-      <About />
-      <Projects />
-      <Skills />
-      <Contact />
+      <div id="hero">
+        <Hero />
+      </div>
+      <div id="about">
+        <About />
+      </div>
+      <div id="projects">
+        <Projects />
+      </div>
+      <div id="skills">
+        <Skills />
+      </div>
+      <div id="contact">
+        <Contact />
+      </div>
       <Footer />
     </main>
   )

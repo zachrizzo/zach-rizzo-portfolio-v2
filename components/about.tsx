@@ -63,21 +63,14 @@ function Terminal({ children }: { children: React.ReactNode }) {
 export default function About() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, amount: 0.3 })
-  const [activeTab, setActiveTab] = useState("background")
   const { resolvedTheme } = useTheme()
   const isDark = resolvedTheme === 'dark'
 
   // Text content for the background section
-  const backgroundText = `With over 6 years of experience in software engineering, I specialize in building AI-powered applications that combine cutting-edge technology with intuitive user experiences.
-
-My expertise spans both front-end and back-end development, enabling me to create comprehensive solutions that integrate AI models, data processing pipelines, and responsive interfaces.`
+  const backgroundText = `Results-driven Software Engineer with 6 years of experience in React, React Native, Automation, and Full-Stack Application Development. Specializes in Workflow Optimization, Process Streamlining, and Agile/Scrum methodologies. Proven ability to excel in high-paced environments, leveraging strong problem-solving skills and a focus on UI/UX Design Excellence. Committed to Continuous Learning and Technological Innovation.`
 
   // Split the background text into lines for the terminal display
   const backgroundLines = backgroundText.split('\n')
-
-  const handleTabChange = (value: string) => {
-    setActiveTab(value)
-  }
 
   return (
     <section id="about" className="py-20 px-4 md:px-6 relative" ref={ref}>
@@ -115,133 +108,42 @@ My expertise spans both front-end and back-end development, enabling me to creat
             className="relative z-10"
           >
             <div className="relative">
-              <div className="mb-6 flex bg-muted rounded-lg p-1 relative z-30">
-                <button
-                  onClick={() => handleTabChange("background")}
-                  className={`flex-1 px-3 py-1.5 text-sm font-medium rounded-md transition-all ${activeTab === "background"
-                    ? "bg-background text-foreground shadow-sm"
-                    : "text-muted-foreground hover:text-foreground"
-                    }`}
-                >
-                  Background
-                </button>
-                <button
-                  onClick={() => handleTabChange("experience")}
-                  className={`flex-1 px-3 py-1.5 text-sm font-medium rounded-md transition-all ${activeTab === "experience"
-                    ? "bg-background text-foreground shadow-sm"
-                    : "text-muted-foreground hover:text-foreground"
-                    }`}
-                >
-                  Experience
-                </button>
-              </div>
-
               <div className="mt-6">
                 <div className="space-y-4">
                   <h2 className="text-3xl font-bold mb-4">
-                    {activeTab === "background" ? "My Journey" : "Work Experience"}
+                    My Journey
                   </h2>
 
                   {/* Fixed height container to prevent layout shift */}
                   <div className="h-[300px]">
-                    {activeTab === "background" && (
-                      <Terminal>
-                        <div className="grid" style={{ gridTemplateColumns: "auto 1fr" }}>
-                          {/* Line numbers */}
-                          <div className={`pr-4 text-right ${isDark ? 'text-gray-500' : 'text-gray-400'} select-none border-r ${isDark ? 'border-gray-700' : 'border-gray-300'} mr-4`}>
-                            {backgroundLines.map((_, i) => (
-                              <div key={i} className="leading-6">
-                                {i + 1}
-                              </div>
-                            ))}
-                          </div>
-
-                          {/* Content with typewriter effect */}
-                          <div className="min-h-[120px]">
-                            <Typewriter
-                              options={{
-                                delay: 30,
-                                cursor: '|',
-                                cursorClassName: `${isDark ? 'text-gray-200' : 'text-gray-800'}`,
-                              }}
-                              onInit={(typewriter) => {
-                                typewriter
-                                  .typeString(backgroundLines[0])
-                                  .pauseFor(500)
-                                  .typeString('<br><br>' + backgroundLines[1])
-                                  .start();
-                              }}
-                            />
-                          </div>
+                    <Terminal>
+                      <div className="grid" style={{ gridTemplateColumns: "auto 1fr" }}>
+                        {/* Line numbers */}
+                        <div className={`pr-4 text-right ${isDark ? 'text-gray-500' : 'text-gray-400'} select-none border-r ${isDark ? 'border-gray-700' : 'border-gray-300'} mr-4`}>
+                          {backgroundLines.map((_, i) => (
+                            <div key={i} className="leading-6">
+                              {i + 1}
+                            </div>
+                          ))}
                         </div>
-                      </Terminal>
-                    )}
 
-                    {activeTab === "experience" && (
-                      <Terminal>
-                        <div className="grid" style={{ gridTemplateColumns: "auto 1fr" }}>
-                          {/* Line numbers */}
-                          <div className={`pr-4 text-right ${isDark ? 'text-gray-500' : 'text-gray-400'} select-none border-r ${isDark ? 'border-gray-700' : 'border-gray-300'} mr-4`}>
-                            {[...Array(9)].map((_, i) => (
-                              <div key={i} className="leading-6">
-                                {i + 1}
-                              </div>
-                            ))}
-                          </div>
-
-                          {/* Content with typewriter effect */}
-                          <div className="min-h-[180px]">
-                            <p className={`font-bold mb-1 ${isDark ? 'text-green-400' : 'text-green-600'}`}>// Software Engineer</p>
-                            <p className={`text-sm mb-1 ${isDark ? 'text-blue-300' : 'text-blue-600'}`}>// SLP Toolkit, January 2024 - Present</p>
-                            <div className="mb-4">
-                              <Typewriter
-                                options={{
-                                  delay: 30,
-                                  cursor: '|',
-                                }}
-                                onInit={(typewriter) => {
-                                  typewriter
-                                    .typeString('Co-leading design and development of an AI-powered SaaS product with React, Next.js, and Node.js.')
-                                    .start();
-                                }}
-                              />
-                            </div>
-
-                            <p className={`font-bold mb-1 ${isDark ? 'text-green-400' : 'text-green-600'}`}>// Software Engineer</p>
-                            <p className={`text-sm mb-1 ${isDark ? 'text-blue-300' : 'text-blue-600'}`}>// American Medical Associates, January 2022 - February 2024</p>
-                            <div className="mb-4">
-                              <Typewriter
-                                options={{
-                                  delay: 30,
-                                  cursor: '|',
-                                }}
-                                onInit={(typewriter) => {
-                                  typewriter
-                                    .typeString('Led development of unified web and mobile applications using React Native and Redux.')
-                                    .start();
-                                }}
-                              />
-                            </div>
-
-                            <p className={`font-bold mb-1 ${isDark ? 'text-green-400' : 'text-green-600'}`}>// Software Engineer</p>
-                            <p className={`text-sm mb-1 ${isDark ? 'text-blue-300' : 'text-blue-600'}`}>// Flow Team, October 2020 - December 2021</p>
-                            <div className="mb-4">
-                              <Typewriter
-                                options={{
-                                  delay: 30,
-                                  cursor: '|',
-                                }}
-                                onInit={(typewriter) => {
-                                  typewriter
-                                    .typeString('Developed team management and geolocation mobile applications with React Native.')
-                                    .start();
-                                }}
-                              />
-                            </div>
-                          </div>
+                        {/* Content with typewriter effect */}
+                        <div className="min-h-[120px]">
+                          <Typewriter
+                            options={{
+                              delay: 30,
+                              cursor: '|',
+                              cursorClassName: `${isDark ? 'text-gray-200' : 'text-gray-800'}`,
+                            }}
+                            onInit={(typewriter) => {
+                              typewriter
+                                .typeString(backgroundText)
+                                .start();
+                            }}
+                          />
                         </div>
-                      </Terminal>
-                    )}
+                      </div>
+                    </Terminal>
                   </div>
                 </div>
               </div>

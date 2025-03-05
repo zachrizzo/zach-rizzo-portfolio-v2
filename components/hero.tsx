@@ -421,7 +421,7 @@ export default function Hero() {
   const scale = useTransform(scrollYProgress, [0, 0.2], [1, 0.9])
 
   return (
-    <section className="relative h-screen w-full flex flex-col items-center justify-center overflow-hidden">
+    <section className="relative h-screen w-full flex flex-col items-center justify-center overflow-hidden pt-16 md:pt-20">
       <div className="absolute inset-0 z-0" suppressHydrationWarning>
         <Canvas dpr={[1, 2]} camera={{ position: [0, 0, 8], fov: 60 }} shadows>
           {/* Ambient light for base illumination */}
