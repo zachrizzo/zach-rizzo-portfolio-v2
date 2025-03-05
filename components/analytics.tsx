@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react"
 import { initializeApp, getApps } from "firebase/app"
 import { getAnalytics, logEvent } from "firebase/analytics"
-import { getFirestore, collection, addDoc, serverTimestamp } from "firebase/firestore"
+import { useVisitor } from "@/lib/visitorContext"
 
 // Your Firebase configuration
 const firebaseConfig = {
@@ -17,11 +17,18 @@ const firebaseConfig = {
 }
 
 export function Analytics() {
-  const [isInitialized, setIsInitialized] = useState(false)
+  // Use the visitor context
+  const { visitorData, isLoading, error } = useVisitor();
+  const [isMounted, setIsMounted] = useState(false);
+
+  // Use a separate useEffect for mounting to prevent hydration issues
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   useEffect(() => {
-    // Only run on client side
-    if (typeof window === "undefined") return
+    // Only run on client side and after component is mounted
+    if (typeof window === "undefined" || !isMounted) return;
 
     // Check if Firebase config is available and appears valid
     if (!firebaseConfig.apiKey || firebaseConfig.apiKey === "your-api-key" || !firebaseConfig.projectId) {
@@ -29,11 +36,11 @@ export function Analytics() {
       return
     }
 
-    const initializeFirebase = async () => {
+    const initializeAnalytics = async () => {
       try {
         // Check if we're in a development environment with potential API issues
         if (process.env.NODE_ENV === 'development') {
-          console.log('Firebase initialization in development mode with enhanced error handling');
+          console.log('Firebase analytics initialization in development mode with enhanced error handling');
         }
 
         // Initialize Firebase only if it hasn't been initialized yet
@@ -44,7 +51,13 @@ export function Analytics() {
           process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID !== "your-measurement-id") {
           try {
             const analytics = getAnalytics(app)
-            logEvent(analytics, "page_view")
+
+            // Log page view
+            logEvent(analytics, "page_view", {
+              page_path: window.location.pathname,
+              page_title: document.title,
+              page_location: window.location.href,
+            })
 
             // Track scroll depth
             const trackScrollDepth = () => {
@@ -73,47 +86,20 @@ export function Analytics() {
             // Continue execution - analytics failure shouldn't break the app
           }
         }
-
-        // Log visitor to Firestore with better error handling
-        try {
-          const db = getFirestore(app)
-
-          // Wrap Firebase calls in more robust error handling
-          try {
-            await addDoc(collection(db, "visitors"), {
-              timestamp: serverTimestamp(),
-              userAgent: navigator.userAgent,
-              language: navigator.language,
-              referrer: document.referrer || "direct",
-              path: window.location.pathname,
-              screenWidth: window.innerWidth,
-              screenHeight: window.innerHeight,
-              timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-            })
-            console.log("Visitor logged successfully")
-            setIsInitialized(true)
-          } catch (innerError) {
-            // Check specifically for JSON parse errors that might come from Firebase
-            if (innerError instanceof SyntaxError && innerError.message.includes('Unexpected token')) {
-              console.error("Firebase returned an invalid response format. This could be a temporary service issue.", innerError);
-            } else {
-              console.error("Error logging visitor to Firestore:", innerError)
-            }
-            // Don't rethrow - let the app continue
-          }
-        } catch (firestoreError) {
-          console.error("Error initializing Firestore:", firestoreError)
-          // Don't throw - allow the application to continue functioning
-        }
       } catch (error) {
-        console.error("Firebase initialization error:", error)
+        console.error("Firebase analytics initialization error:", error)
         // Gracefully handle Firebase initialization failure
         // We don't want to crash the app if analytics fails
       }
     }
 
-    initializeFirebase()
-  }, [])
+    // Small delay to ensure hydration is complete
+    const timeoutId = setTimeout(() => {
+      initializeAnalytics();
+    }, 500);
+
+    return () => clearTimeout(timeoutId);
+  }, [isMounted]) // Only run when isMounted changes
 
   return null
 }

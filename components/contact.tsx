@@ -2,10 +2,9 @@
 
 import type React from "react"
 
-import { useState, useRef } from "react"
+import { useState, useRef, useEffect } from "react"
 import { motion, useInView } from "framer-motion"
-import { Canvas } from "@react-three/fiber"
-import { Environment, ContactShadows, Float } from "@react-three/drei"
+import dynamic from "next/dynamic"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
@@ -14,16 +13,11 @@ import { Mail, Phone, MapPin, Send, Loader2 } from "lucide-react"
 import { initializeApp, getApps } from "firebase/app"
 import { getFirestore, collection, addDoc, serverTimestamp } from "firebase/firestore"
 
-function ContactModel() {
-  return (
-    <Float speed={1.5} rotationIntensity={0.4} floatIntensity={0.4}>
-      <mesh scale={1.5}>
-        <torusGeometry args={[1, 0.3, 16, 32]} />
-        <meshStandardMaterial color="#7928CA" wireframe />
-      </mesh>
-    </Float>
-  )
-}
+// Dynamically import the 3D components with no SSR to avoid hydration issues
+const ThreeCanvas = dynamic(
+  () => import("@/components/three-canvas").then((mod) => mod.ThreeCanvas),
+  { ssr: false }
+);
 
 // Firebase configuration
 const firebaseConfig = {
@@ -49,9 +43,15 @@ export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitSuccess, setSubmitSuccess] = useState(false)
   const [submitError, setSubmitError] = useState("")
+  const [isMounted, setIsMounted] = useState(false)
 
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, amount: 0.3 })
+
+  // Use a separate useEffect for mounting to prevent hydration issues
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
@@ -118,14 +118,11 @@ export default function Contact() {
 
   return (
     <section id="contact" className="py-20 px-4 md:px-6 relative" ref={ref}>
-      <div className="absolute inset-0 pointer-events-none opacity-30" suppressHydrationWarning>
-        <Canvas>
-          <ambientLight intensity={0.5} />
-          <ContactModel />
-          <ContactShadows opacity={0.5} scale={10} blur={1} far={10} resolution={256} />
-          <Environment preset="city" />
-        </Canvas>
-      </div>
+      {isMounted && (
+        <div className="absolute inset-0 pointer-events-none opacity-30">
+          <ThreeCanvas />
+        </div>
+      )}
 
       <div className="max-w-6xl mx-auto relative z-10">
         <motion.div
