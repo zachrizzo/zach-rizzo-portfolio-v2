@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 import Link from "next/link"
 import { useTheme } from "next-themes"
 import { motion } from "framer-motion"
-import { Menu, X, Moon, Sun } from "lucide-react"
+import { Menu, X, Moon, Sun, Github } from "lucide-react"
 import ThemeToggle from "@/components/theme-toggle"
 
 const navItems = [
@@ -43,8 +43,8 @@ export default function Header() {
     return (
         <header
             className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
-                    ? `${isDark ? "bg-background/90 backdrop-blur-md" : "bg-background/90 backdrop-blur-md"} shadow-md`
-                    : "bg-transparent"
+                ? `${isDark ? "bg-background/90 backdrop-blur-md" : "bg-background/90 backdrop-blur-md"} shadow-md`
+                : "bg-transparent"
                 }`}
         >
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -81,11 +81,42 @@ export default function Header() {
                                 </Link>
                             </motion.div>
                         ))}
+
+                        {/* GitHub Button */}
+                        <motion.div
+                            initial={{ opacity: 0, y: -10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.3, delay: navItems.length * 0.1 }}
+                        >
+                            <a
+                                href="https://github.com/zachrizzo"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex items-center text-sm font-medium transition-colors hover:text-primary cursor-pointer"
+                                aria-label="GitHub Profile"
+                                title="View GitHub Profile"
+                            >
+                                <Github className="h-5 w-5" />
+                            </a>
+                        </motion.div>
+
                         <ThemeToggle />
                     </nav>
 
                     {/* Mobile Menu Button */}
                     <div className="flex items-center md:hidden">
+                        {/* GitHub Button for Mobile */}
+                        <a
+                            href="https://github.com/zachrizzo"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="p-2 text-foreground hover:text-primary"
+                            aria-label="GitHub Profile"
+                            title="View GitHub Profile"
+                        >
+                            <Github className="h-5 w-5" />
+                        </a>
+
                         <ThemeToggle />
                         <button
                             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}

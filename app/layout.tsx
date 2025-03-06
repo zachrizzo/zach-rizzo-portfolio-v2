@@ -8,24 +8,24 @@ import { VisitorProvider } from "@/lib/visitorContext"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "John Doe | Portfolio",
+  title: "Zach Rizzo | Portfolio",
   description: "Full Stack Developer & Creative Technologist",
   keywords: ["developer", "portfolio", "react", "next.js", "3D", "web development"],
-  authors: [{ name: "John Doe" }],
-  creator: "John Doe",
+  authors: [{ name: "Zach Rizzo" }],
+  creator: "Zach Rizzo",
   openGraph: {
     type: "website",
     locale: "en_US",
     url: "https://johndoe-portfolio.com",
-    title: "John Doe | Portfolio",
+    title: "Zach Rizzo | Portfolio",
     description: "Full Stack Developer & Creative Technologist",
-    siteName: "John Doe Portfolio",
+    siteName: "Zach Rizzo Portfolio",
   },
   twitter: {
     card: "summary_large_image",
-    title: "John Doe | Portfolio",
+    title: "Zach Rizzo | Portfolio",
     description: "Full Stack Developer & Creative Technologist",
-    creator: "@johndoe",
+    creator: "@zachrizzo",
   },
 }
 

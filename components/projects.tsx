@@ -24,9 +24,9 @@ const projects = [
     description: "A stock forecasting application leveraging transformer architecture to predict 30-day market trajectories.",
     longDescription:
       "Engineered a stock forecasting application using transformer architecture to predict 30-day market trajectories. Implemented customized pre-training on historical price data, integrating news sentiment analysis and flexible technical indicators. Designed an intuitive AI Tooling interface that streamlines data extraction, model training, and visualization processes across any publicly traded security, enabling efficient forecasting and parameter optimization.",
-    image: "/placeholder.svg?height=600&width=800",
+    image: "/ai_helix_dash.png",
     category: "ai",
-    tags: ["Pytorch", "Numpy", "Pandas", "Python", "scikit-learn", "matplotlib"],
+    tags: ["React", "Next.js", "shadcn", "tailwind"],
     demoUrl: "#",
     githubUrl: "https://github.com/zachrizzo/Helix-ai-tooling",
   },
@@ -51,7 +51,7 @@ const projects = [
     image: "/robot_screenshot.png",
     category: "ai",
     tags: ["Ros 2", "Rviz", "Map", "Slam", "LangChain"],
-    demoUrl: "#",
+    demoUrl: null,
     githubUrl: "https://github.com/zachrizzo/robot_smart_camera",
   },
   // {

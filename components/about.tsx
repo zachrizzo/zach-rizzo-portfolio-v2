@@ -88,7 +88,7 @@ export default function About() {
             transition={{ duration: 0.8 }}
             className="relative h-[400px] rounded-2xl overflow-hidden shadow-xl"
           >
-            <Image src="/placeholder.svg?height=800&width=600" alt="Profile" fill className="object-cover" priority />
+            <Image src="/head_shot.jpg" alt="Profile" fill className="object-cover" priority />
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end">
               <div className="p-6 text-white">
                 <h3 className="text-xl font-bold">Zachary Rizzo</h3>
