@@ -21,13 +21,13 @@ const projects = [
   {
     id: 1,
     title: "Helix AI tooling dashboard board (prototype)",
-    description: "A stock forecasting application leveraging transformer architecture to predict 30-day market trajectories.",
+    description: "A prototype dashboard a ai tooling dashboard that would allow a team to train, test, and deploy models for humanoid robotics.",
     longDescription:
-      "Engineered a stock forecasting application using transformer architecture to predict 30-day market trajectories. Implemented customized pre-training on historical price data, integrating news sentiment analysis and flexible technical indicators. Designed an intuitive AI Tooling interface that streamlines data extraction, model training, and visualization processes across any publicly traded security, enabling efficient forecasting and parameter optimization.",
+      "This is a prototype dashboard a ai tooling dashboard that would allow a team to train, test, and deploy models for humanoid robotics.",
     image: "/ai_helix_dash.png",
     category: "ai",
     tags: ["React", "Next.js", "shadcn", "tailwind"],
-    demoUrl: "#",
+    demoUrl: "https://helix-ai-tooling.vercel.app/",
     githubUrl: "https://github.com/zachrizzo/Helix-ai-tooling",
   },
   {
@@ -35,10 +35,10 @@ const projects = [
     title: "AI Transformer Stock Trader (Research)",
     description: "Advanced AI trading system combining transformer architecture with technical and sentiment analysis.",
     longDescription:
-      "Engineered a sophisticated trading application leveraging Pytorch, Numpy, Pandas, Python, scikit-learn, and matplotlib. Designed with customized pre-training on historical price data, integrating news sentiment analysis and flexible technical indicators. Created an intuitive AI Tooling interface that streamlines data extraction, model training, and visualization processes across any publicly traded security, enabling efficient backtesting and parameter optimization.",
+      "Engineered a sophisticated trading application leveraging Transformer architecture, Pytorch, Numpy, Pandas, Python, scikit-learn, and matplotlib. Designed with customized pre-training on historical price data, integrating news sentiment analysis and flexible technical indicators. Created an intuitive AI Tooling interface that streamlines data extraction, model training, and visualization processes across any publicly traded security, enabling efficient backtesting and parameter optimization.",
     image: "/stock-trainner.png",
     category: "ai",
-    tags: ["Pytorch", "Numpy", "Pandas", "Python", "scikit-learn", "matplotlib"],
+    tags: ["Pytorch", "Numpy", "Pandas", "Python", "scikit-learn", "matplotlib", "Transformer"],
     demoUrl: null,
     githubUrl: "https://github.com/zachrizzo/transfomer_stocks",
   },
@@ -50,7 +50,7 @@ const projects = [
       "Developed an AI robot using Ros 2, Rviz, Map, Slam, LangChain technologies. Created a system that can navigate in map space around itself, identify objects it has seen through visual inquiry, and efficiently search using a 3D depth camera, Lidar, and vector search capabilities.",
     image: "/robot_screenshot.png",
     category: "ai",
-    tags: ["Ros 2", "Rviz", "Map", "Slam", "LangChain"],
+    tags: ["Ros 2", "Rviz", "Map", "Slam", "LangChain", "Python", "Rtabmap"],
     demoUrl: null,
     githubUrl: "https://github.com/zachrizzo/robot_smart_camera",
   },
