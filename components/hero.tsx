@@ -58,28 +58,28 @@ function Model() {
 
       // Generate particle colors with more contrast - use purples to match theme
       if (isDarkMode) {
-        // Dark mode theme - purples and whites
+        // Dark mode theme - no whites, only purples and dark grays
         if (Math.random() > 0.7) {
-          // Accent particles - vibrant purple
+          // Accent particles - vibrant purple (matches primary in dark mode)
           colors[i3] = 0.8     // Red
-          colors[i3 + 1] = 0.2 // Green
-          colors[i3 + 2] = 1.0 // Blue
+          colors[i3 + 1] = 0.25  // Green
+          colors[i3 + 2] = 0.85  // Blue - reduced to eliminate any white appearance
         } else if (Math.random() > 0.6) {
-          // Highlight particles - bright white/blue
-          const brightness = 0.8 + Math.random() * 0.2
-          colors[i3] = brightness - 0.1 // Red
-          colors[i3 + 1] = brightness    // Green
-          colors[i3 + 2] = 1.0           // Blue
+          // Highlight particles - darker gray with purple tint (no white at all)
+          const brightness = 0.55 + Math.random() * 0.1
+          colors[i3] = brightness      // Red
+          colors[i3 + 1] = brightness - 0.15  // Green
+          colors[i3 + 2] = brightness + 0.15  // Blue
         } else if (Math.random() > 0.3) {
           // Mid-tone particles - medium purple
-          colors[i3] = 0.5     // Red
-          colors[i3 + 1] = 0.2 // Green
-          colors[i3 + 2] = 0.8 // Blue
+          colors[i3] = 0.6     // Red
+          colors[i3 + 1] = 0.3 // Green
+          colors[i3 + 2] = 0.8 // Blue - slightly reduced
         } else {
-          // Shadow particles - dark purple
-          colors[i3] = 0.2    // Red
-          colors[i3 + 1] = 0.1 // Green
-          colors[i3 + 2] = 0.4 // Blue
+          // Shadow particles - dark purple but still visible
+          colors[i3] = 0.4    // Red
+          colors[i3 + 1] = 0.2 // Green
+          colors[i3 + 2] = 0.65 // Blue - slightly reduced
         }
       } else {
         // Light mode theme - purples to match the rest of the app
@@ -138,8 +138,8 @@ function Model() {
     if (orbitalLights.current.length === 0) {
       for (let i = 0; i < 4; i++) {
         const light = new THREE.PointLight(
-          i % 2 === 0 ? "#ffffff" : "#9d4edd",
-          0.5,
+          i % 2 === 0 ? (isDarkMode ? "#555555" : "#ffffff") : isDarkMode ? "#a855f7" : "#9d4edd",
+          isDarkMode ? 0.5 : 0.5,
           15
         );
         light.position.set(
@@ -159,7 +159,7 @@ function Model() {
       });
       orbitalLights.current = [];
     };
-  }, [scene]);
+  }, [scene, isDarkMode]);
 
   // Store original sphere vertices on first render
   const initializeSphere = () => {
@@ -342,9 +342,9 @@ function Model() {
   })
 
   // Theme-appropriate colors - purple-based to match app theme
-  const glowColor = isDarkMode ? "#7c3aed" : "#9d4edd"   // Purple glow
-  const lineColor = isDarkMode ? "#e9d5ff" : "#7c3aed"   // Light purple in dark mode, darker in light
-  const surfaceColor = isDarkMode ? "#7c3aed" : "#9d4edd" // Match primary purple
+  const glowColor = isDarkMode ? "#a855f7" : "#9d4edd"   // Purple glow - brighter in dark mode
+  const lineColor = isDarkMode ? "#d8b4fe" : "#7c3aed"   // More muted purple in dark mode
+  const surfaceColor = isDarkMode ? "#a855f7" : "#9d4edd" // Match primary purple
 
   return (
     <group
@@ -360,13 +360,13 @@ function Model() {
         <meshPhysicalMaterial
           color={surfaceColor}
           transparent={true}
-          opacity={0.12}
+          opacity={isDarkMode ? 0.15 : 0.12}
           roughness={0.5}
           metalness={0.4}
           clearcoat={0.3}
           clearcoatRoughness={0.2}
           emissive={surfaceColor}
-          emissiveIntensity={0.15}
+          emissiveIntensity={isDarkMode ? 0.2 : 0.15}
         />
       </mesh>
 
@@ -376,7 +376,7 @@ function Model() {
         <meshBasicMaterial
           color={glowColor}
           transparent
-          opacity={0.05}
+          opacity={isDarkMode ? 0.06 : 0.05}
           side={THREE.BackSide}
         />
       </mesh>
@@ -398,17 +398,17 @@ function Model() {
         <lineBasicMaterial
           color={lineColor}
           transparent
-          opacity={0.15}
+          opacity={isDarkMode ? 0.15 : 0.15}
           blending={THREE.AdditiveBlending}
         />
       </lineSegments>
 
       {hovered && (
         <mesh position={[0, -2, 0]}>
-          <Text fontSize={0.2} color={isDarkMode ? "#ffffff" : "#7c3aed"}>
+          <Text fontSize={0.2} color={isDarkMode ? "#d8b4fe" : "#7c3aed"}>
             Interactive Portfolio
           </Text>
-          <meshBasicMaterial color={isDarkMode ? "#ffffff" : "#7c3aed"} />
+          <meshBasicMaterial color={isDarkMode ? "#d8b4fe" : "#7c3aed"} />
         </mesh>
       )}
     </group>
@@ -419,19 +419,21 @@ export default function Hero() {
   const { scrollYProgress } = useScroll()
   const opacity = useTransform(scrollYProgress, [0, 0.2], [1, 0])
   const scale = useTransform(scrollYProgress, [0, 0.2], [1, 0.9])
+  const { resolvedTheme } = useTheme()
+  const isDarkMode = resolvedTheme === "dark"
 
   return (
     <section className="relative h-screen w-full flex flex-col items-center justify-center overflow-hidden pt-16 md:pt-20">
       <div className="absolute inset-0 z-0" suppressHydrationWarning>
         <Canvas dpr={[1, 2]} camera={{ position: [0, 0, 8], fov: 60 }} shadows>
           {/* Ambient light for base illumination */}
-          <ambientLight intensity={0.2} />
+          <ambientLight intensity={isDarkMode ? 0.25 : 0.2} color={isDarkMode ? "#444444" : "#ffffff"} />
 
           {/* Main key light */}
           <directionalLight
             position={[5, 5, 5]}
-            intensity={1.0}
-            color="#ffffff"
+            intensity={isDarkMode ? 0.8 : 1.0}
+            color={isDarkMode ? "#555555" : "#ffffff"}
             castShadow
             shadow-mapSize-width={1024}
             shadow-mapSize-height={1024}
@@ -440,15 +442,15 @@ export default function Hero() {
           {/* Fill light */}
           <directionalLight
             position={[-5, -3, -5]}
-            intensity={0.5}
-            color="#9d4edd"
+            intensity={isDarkMode ? 0.6 : 0.5}
+            color={isDarkMode ? "#9333ea" : "#9d4edd"}
           />
 
           {/* Center light for core illumination */}
           <pointLight
             position={[0, 0, 3]}
-            intensity={0.5}
-            color="#ffffff"
+            intensity={isDarkMode ? 0.4 : 0.5}
+            color={isDarkMode ? "#555555" : "#ffffff"}
             distance={10}
           />
 
